@@ -360,7 +360,7 @@ bool StPicoHFMaker::setupEvent() {
   
   mBField = mPicoEvent->bField();
   mPrimVtx = mPicoEvent->primaryVertex();
-  
+
   int aEventStat[mHFCuts->eventStatMax()];
   
   bool bResult = mHFCuts->isGoodEvent(mPicoDst, aEventStat);

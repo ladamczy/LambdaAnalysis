@@ -32,7 +32,7 @@ void runPicoLambdaAnaMaker(const Char_t *inputFile="test.list", const Char_t *ou
     const unsigned int makerMode = 0 /*kAnalyze*/,
     const Char_t *badRunListFileName = "picoList_bad_MB.list", const Char_t *treeName = "picoHFtree",
     const Char_t *productionBasePath = "/star/data100/reco/AuAu_200_production_2016/ReversedFullField/P16ij/2016",
-    const unsigned int decayChannel = 0 /* kChannel0 */, string SL_version = "SL20c",
+    const unsigned int decayChannel = 0 /* kChannel0 */, string SL_version = "SL21c",
     const int triggerSetup = 0)
 { 
   // -- Check STAR Library. Please set SL_version to the original star library used in the production 
@@ -64,6 +64,8 @@ void runPicoLambdaAnaMaker(const Char_t *inputFile="test.list", const Char_t *ou
   TString sInputListHF("");  
   TString sProductionBasePath(productionBasePath);
   TString sTreeName(treeName);
+
+  cout  << "name " << sInputFile << endl;
 
   if (makerMode == StPicoHFMaker::kAnalyze || makerMode == StPicoHFMaker::kQA)
   {
@@ -125,7 +127,7 @@ void runPicoLambdaAnaMaker(const Char_t *inputFile="test.list", const Char_t *ou
   hfCuts->setBadRunListFileName(badRunListFileName);
 
   // -- ADD USER CUTS HERE ----------------------------
-  hfCuts->setCutVzMax(30.);
+  hfCuts->setCutVzMax(300.);
   hfCuts->setCutVzVpdVzMax(1e6); //original 3 - now open
 
   //MB
@@ -160,7 +162,7 @@ void runPicoLambdaAnaMaker(const Char_t *inputFile="test.list", const Char_t *ou
   else
   {
     cout<<"Wrong trigger setup in runPicoLambdaAnaMaker!"<<endl;
-    return;  
+//    return;  
   }
 
   hfCuts->setCutNHitsFitMin(20); //for analysis (TTree)
@@ -176,11 +178,11 @@ void runPicoLambdaAnaMaker(const Char_t *inputFile="test.list", const Char_t *ou
 
 
   hfCuts->setCutEta(1.);
-  hfCuts->setCutPtMin(0.15); //global min. pT cut
+  hfCuts->setCutPtMin(0.10); //global min. pT cut
 
-  hfCuts->setCutDcaMin(0.3,StHFCuts::kPion);
+  hfCuts->setCutDcaMin(0.001,StHFCuts::kPion);
   //hfCuts->setCutDcaMin(0.01,StHFCuts::kKaon); 
-  hfCuts->setCutDcaMin(0.1,StHFCuts::kProton); 
+  hfCuts->setCutDcaMin(0.001,StHFCuts::kProton); 
 
   //-----------lambda selection cuts----------------------------
   float dcaDaughters12Max;
@@ -206,12 +208,12 @@ void runPicoLambdaAnaMaker(const Char_t *inputFile="test.list", const Char_t *ou
   float cosThetaMin_K0s, massMin_K0s, massMax_K0s;
  
   //K0s cuts
-  dcaDaughtersMax_K0s = 1.;
+  dcaDaughtersMax_K0s = 2.;
 
-  decayLengthMin_K0s = 0.5;
-  decayLengthMax_K0s = 25.;
+  decayLengthMin_K0s = 0.000;
+  decayLengthMax_K0s = 2500.;
 
-  cosThetaMin_K0s = 0.996;
+  cosThetaMin_K0s = -1.0;
 
   massMin_K0s = 0.45;
   massMax_K0s = 0.55;
@@ -256,12 +258,12 @@ void runPicoLambdaAnaMaker(const Char_t *inputFile="test.list", const Char_t *ou
 
   for (Int_t i=0; i<nEvents; i++)
   {
-    if(i%10000==0) cout << "Working on eventNumber " << i << endl;
+    if(i%1==0) cout << "Working on eventNumber " << i << endl;
     //if(i%500==0) cout << "Working on eventNumber " << i << endl;
 
     chain->Clear();
     int iret = chain->Make(i);
-
+//    int iret = 0;
     if(iret) 
     { 
       cout << "Bad return code!" << iret << endl;

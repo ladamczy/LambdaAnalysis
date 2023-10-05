@@ -51,7 +51,7 @@ StHFPair::StHFPair(StPicoTrack const * const particle1, StPicoTrack const * cons
     return;
   }
 
-	StPicoPhysicalHelix p1Helix = particle1->helix(bField); 
+  StPicoPhysicalHelix p1Helix = particle1->helix(bField); 
   StPicoPhysicalHelix p2Helix = particle2->helix(bField); //bFiled not in kilogauss - is properly computed inside helix(double B) function in StPicoTrack.h
 
   // -- move origins of helices to the primary vertex origin
