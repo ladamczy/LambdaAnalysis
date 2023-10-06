@@ -208,12 +208,12 @@ void runPicoLambdaAnaMaker(const Char_t *inputFile="test.list", const Char_t *ou
   float cosThetaMin_K0s, massMin_K0s, massMax_K0s;
  
   //K0s cuts
-  dcaDaughtersMax_K0s = 2.;
+  dcaDaughtersMax_K0s = 1.;
 
-  decayLengthMin_K0s = 0.000;
-  decayLengthMax_K0s = 2500.;
+  decayLengthMin_K0s = 0.2;
+  decayLengthMax_K0s = 10.0;
 
-  cosThetaMin_K0s = -1.0;
+  cosThetaMin_K0s = 0.99;
 
   massMin_K0s = 0.45;
   massMax_K0s = 0.55;
